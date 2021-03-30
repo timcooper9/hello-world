@@ -60,5 +60,18 @@ CREATE TABLE transactions (
 
 -- Query to show breakdown of TPV and cost by card country of issuance 
 
-with total as (select sum(fee_amount) as total from reconciliation), total_TPV as (select sum(transaction_amount) as total from reconciliation) select country_of_issuance, sum(transaction_amount) as TPV, sum(transaction_amount)/total_TPV.total*100 as TPV_as_pct_of_total, sum(fee_amount)/sum(transaction_amount)*-100 as fee_pct, sum(fee_amount)/total.total*100 as fee_pct_of_total from total, total_TPV, transactions inner join reconciliation where transactions.transa
-ction_id = reconciliation.transaction_id group by 1 order by 2 desc;
+WITH total AS (select sum(fee_amount) AS total AS reconciliation), 
+total_TPV AS (select sum(transaction_amount) AS total from reconciliation) 
+SELECT t.country_of_issuance, 
+sum(r.transaction_amount) AS TPV, 
+sum(r.transaction_amount)/total_TPV.total*100 AS TPV_as_pct_of_total, 
+sum(r.fee_amount)/sum(r.transaction_amount)*-100 AS fee_pct, 
+sum(r.fee_amount)/total.total*100 AS fee_pct_of_total 
+FROM total, 
+total_TPV, 
+transactions AS t
+INNER JOIN reconciliation AS r
+ON t.transaction_id = r.transaction_id 
+GROUP BY 1 
+ORDER BY 2 desc
+;
