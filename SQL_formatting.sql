@@ -2,7 +2,7 @@
 
 CREATE TABLE reconciliation (
   transaction_id TEXT, 
-  settlement_date DATETIME, 
+  settlement_date TIMESTAMP, 
   merchant_name TEXT, 
   merchant_account TEXT, 
   mid TEXT, 
@@ -15,7 +15,7 @@ CREATE TABLE reconciliation (
   interchange_description TEXT, 
   card_type TEXT, 
   region_relation TEXT, 
-  processing_date DATETIME
+  processing_date TIMESTAMP
 );
 
 -- Table for transaction data to be added to 
@@ -24,10 +24,10 @@ CREATE TABLE transactions (
   transaction_id TEXT, 
   transaction_type TEXT, 
   transaction_status TEXT, 
-  created_datetime DATETIME, 
+  created_datetime TIMESTAMP, 
   created_timezone TEXT, 
-  settlement_date DATETIME, 
-  disbursement_date DATETIME, 
+  settlement_date TIMESTAMP, 
+  disbursement_date TIMESTAMP, 
   merchant_account TEXT, 
   currency_iso TEXT, 
   amount_authorised REAL, 
@@ -38,7 +38,7 @@ CREATE TABLE transactions (
   cardholder name TEXT, 
   first_six TEXT, 
   last_four TEXT, 
-  expiration_date DATETIME, 
+  expiration_date TIMESTAMP, 
   customer_id TEXT, 
   payment_method_token TEXT, 
   cvv_response TEXT, 
