@@ -35,7 +35,7 @@ CREATE TABLE transactions (
   order_id TEXT, 
   descriptor_name TEXT, 
   card_brand TEXT, 
-  cardholder name TEXT, 
+  cardholder_name TEXT, 
   first_six TEXT, 
   last_four TEXT, 
   expiration_date TIMESTAMP, 
